@@ -10,7 +10,7 @@ const App = () => {
     <Container>
       <Container>
         <Input />
-        <Button>Agregar</Button>
+        <Button className="button">Agregar</Button>
       </Container>
       <List>
         <ListItem>Poner estilos</ListItem>
