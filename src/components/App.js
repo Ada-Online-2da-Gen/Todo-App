@@ -2,7 +2,7 @@ import React from 'react'
 import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'
 import List from 'components/List/List'
-import ListItem from 'components/List/List'
+import ListItem from 'components/ListItem/ListItem'
 
 const App = () => {
   return (
