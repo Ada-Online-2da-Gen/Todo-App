@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import shortId from 'shortid'
 
 import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'
@@ -6,11 +7,14 @@ import TodoList from 'components/TodoList/TodoList'
 import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
 
+import initialTodos from 'data'
+
 const App = () => {
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState(initialTodos)
 
   const handleChange = (event) => {
-    event.key === 'Enter' && setTodos([...todos, { id: todos.length, text: event.target.value }])
+    event.key === 'Enter' &&
+      setTodos([...todos, { id: shortId.generate(), text: event.target.value }])
   }
 
   return (
@@ -20,8 +24,8 @@ const App = () => {
         <Button className="button">Agregar</Button>
       </Container>
       <TodoList>
-        {todos.map((todo, index) => (
-          <Todo key={index} id={todo.id}>
+        {todos.map((todo) => (
+          <Todo key={todo.id} id={todo.id}>
             {todo.text}
           </Todo>
         ))}
