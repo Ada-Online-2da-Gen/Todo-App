@@ -1,18 +1,13 @@
 import React, { useState } from 'react'
+
 import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'
-import TodoList from 'components/List/TodoList'
-import Todo from 'components/ListItem/Todo'
+import TodoList from 'components/TodoList/TodoList'
+import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
 
 const App = () => {
-  const todosList = [
-    { id: 0, text: 'Poner estilos' },
-    { id: 1, text: 'Armar componentes' },
-    { id: 2, text: 'Agregar funcionalidad' }
-  ]
-
-  const [todos, setTodos] = useState(todosList)
+  const [todos, setTodos] = useState([])
 
   const handleChange = (event) => {
     event.key === 'Enter' && setTodos([...todos, { id: todos.length, text: event.target.value }])

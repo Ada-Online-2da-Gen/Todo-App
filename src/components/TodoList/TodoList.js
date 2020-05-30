@@ -1,7 +1,8 @@
 import React from 'react'
+import List from 'components/List/List'
 
 const TodoList = ({ children, ...props }) => {
-  return <ul {...props}>{children}</ul>
+  return <List {...props}>{children}</List>
 }
 
 export default TodoList
