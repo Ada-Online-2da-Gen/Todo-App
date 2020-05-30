@@ -13,16 +13,32 @@ const App = () => {
   ]
 
   const [todos, setTodos] = useState(todosList)
+  const [input, setInput] = useState('')
+
+  const submitItem = (event) => {
+    const condition = (event.key === 'Enter' || event.type === 'click') && input.length > 0
+    if (condition) {
+      setTodos([...todos, { id: todos.length, text: input }])
+      setInput('')
+    }
+  }
 
   const handleChange = (event) => {
-    event.key === 'Enter' && setTodos([...todos, { id: todos.length, text: event.target.value }])
+    setInput(event.target.value)
   }
 
   return (
     <Container>
       <Container>
-        <Input onKeyPress={handleChange} />
-        <Button className="button">Agregar</Button>
+        <Input
+          onKeyPress={submitItem}
+          value={input}
+          onChange={handleChange}
+          placeholder="Ingrese el ítem aquí"
+        />
+        <Button className="button" onClick={submitItem}>
+          Agregar
+        </Button>
       </Container>
       <TodoList>
         {todos.map((todo, index) => (
