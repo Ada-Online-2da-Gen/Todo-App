@@ -20,8 +20,15 @@ const App = () => {
   return (
     <Container>
       <Container>
-        <Input onKeyPress={handleChange} />
-        <Button className="button">Agregar</Button>
+        <Input
+          onKeyPress={submitItem}
+          value={input}
+          onChange={handleChange}
+          placeholder="Ingrese el ítem aquí"
+        />
+        <Button className="button" onClick={submitItem}>
+          Agregar
+        </Button>
       </Container>
       <TodoList>
         {todos.map((todo) => (
