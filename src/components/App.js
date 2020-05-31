@@ -33,8 +33,8 @@ const App = () => {
     <Container>
       <Container>
         <Input
-          onKeyPress={handleKeyPress}
           value={input}
+          onKeyPress={handleKeyPress}
           onChange={handleChange}
           placeholder="Ingrese una nueva tarea"
         />
