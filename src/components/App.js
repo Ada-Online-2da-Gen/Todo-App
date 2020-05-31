@@ -11,6 +11,18 @@ import initialTodos from 'data'
 
 const App = () => {
   const [todos, setTodos] = useState(initialTodos)
+  const addTodo = () => {
+    setTodos([...todos, { id: todos.length, text: input }])
+    setInput('')
+  }
+
+  const handleKeyPress = (event) => {
+    event.key === 'Enter' && input.length > 0 && addTodo()
+  }
+
+  const handleClick = (event) => {
+    event.type === 'click' && input.length > 0 && addTodo()
+  }
 
   const handleChange = (event) => {
     event.key === 'Enter' &&
@@ -21,12 +33,12 @@ const App = () => {
     <Container>
       <Container>
         <Input
-          onKeyPress={submitItem}
+          onKeyPress={handleKeyPress}
           value={input}
           onChange={handleChange}
-          placeholder="Ingrese el ítem aquí"
+          placeholder="Ingrese una nueva tarea"
         />
-        <Button className="button" onClick={submitItem}>
+        <Button className="button" onClick={handleClick}>
           Agregar
         </Button>
       </Container>
