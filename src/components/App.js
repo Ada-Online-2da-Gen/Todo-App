@@ -17,6 +17,7 @@ const App = () => {
 
   const submitItem = (event) => {
     const condition = (event.key === 'Enter' || event.type === 'click') && input.length > 0
+
     if (condition) {
       setTodos([...todos, { id: todos.length, text: input }])
       setInput('')
