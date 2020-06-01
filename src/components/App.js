@@ -7,12 +7,14 @@ import TodoList from 'components/TodoList/TodoList'
 import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
 
-import initialTodos from 'data'
+import todosList from 'data'
 
 const App = () => {
-  const [todos, setTodos] = useState(initialTodos)
+  const [todos, setTodos] = useState(todosList)
+  const [input, setInput] = useState('')
+
   const addTodo = () => {
-    setTodos([...todos, { id: todos.length, text: input }])
+    setTodos([...todos, { id: shortId.generate(), text: input }])
     setInput('')
   }
 
@@ -25,8 +27,7 @@ const App = () => {
   }
 
   const handleChange = (event) => {
-    event.key === 'Enter' &&
-      setTodos([...todos, { id: shortId.generate(), text: event.target.value }])
+    setInput(event.target.value)
   }
 
   return (
