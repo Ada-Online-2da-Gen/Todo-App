@@ -18,6 +18,14 @@ const App = () => {
     setInput('')
   }
 
+  const updateToDo = (id, texto) => {
+    const toDoToChange = todos.find((todo) => todo.id === id)
+    const toDoIndex = todos.indexOf(toDoToChange)
+    const newToDos = [...todos]
+    newToDos.splice(toDoIndex, 1, { id: id, text: texto })
+    setTodos(newToDos)
+  }
+
   const handleKeyPress = (event) => {
     event.key === 'Enter' && input.length > 0 && addTodo()
   }
@@ -45,7 +53,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id}>
+          <Todo key={todo.id} id={todo.id} onUpdateText={updateToDo} value={todo.text}>
             {todo.text}
           </Todo>
         ))}
