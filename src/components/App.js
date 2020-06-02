@@ -8,6 +8,7 @@ import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
 
 import todosList from 'data'
+import { BsTrash } from 'react-icons/bs'
 
 const App = () => {
   const [todos, setTodos] = useState(todosList)
@@ -33,6 +34,10 @@ const App = () => {
 
   const handleChange = (event) => {
     setInput(event.target.value)
+  }
+
+  const deleteToDo = (id) => {
+    setTodos(todos.filter((todo) => todo.id != id))
   }
 
   return (
