@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import shortId from 'shortid'
-import { BsTrash as IconDelete } from 'react-icons/bs'
 
 import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'
@@ -51,11 +50,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo
-            key={todo.id}
-            id={todo.id}
-            icon={<IconDelete onClick={() => handleDeleteTodo(todo.id)} />}
-          >
+          <Todo key={todo.id} id={todo.id} onDelete={() => handleDeleteTodo(todo.id)}>
             {todo.text}
           </Todo>
         ))}
