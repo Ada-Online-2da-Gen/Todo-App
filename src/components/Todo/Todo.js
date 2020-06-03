@@ -17,23 +17,28 @@ const Todo = ({ onUpdateText, id, children, ...props }) => {
 
   const changeTodoText = (event) => setTodoText(event.target.value)
 
-  const saveChangesEnter = (event) => {
-    if (event.key === 'Enter' && todoText.length > 0) {
+  const finishTodoEdition = () => {
+    if (todoText.length > 0) {
       onUpdateText(id, todoText)
       setIsEditing(false)
+    }
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      finishTodoEdition()
+    }
+  }
+
+  const handleSaveButtonClick = () => {
+    if (todoText.length > 0) {
+      finishTodoEdition()
     }
   }
 
   const escapeEdit = (event) => {
     if (event.key === 'Escape') {
       cancelEdit()
-    }
-  }
-
-  const saveChangesBtn = () => {
-    if (todoText.length > 0) {
-      onUpdateText(id, todoText)
-      setIsEditing(false)
     }
   }
 
@@ -46,13 +51,12 @@ const Todo = ({ onUpdateText, id, children, ...props }) => {
     <>
       <Input
         onChange={changeTodoText}
-        onKeyPress={saveChangesEnter}
+        onKeyPress={handleKeyPress}
         onKeyDown={escapeEdit}
-        onBlur={cancelEdit}
         value={todoText}
       />
       <CancelIcon onClick={cancelEdit} />
-      <Button onClick={saveChangesBtn}>Guardar</Button>
+      <Button onClick={handleSaveButtonClick}>Guardar</Button>
     </>
   ) : (
     <ListItem onMouseEnter={showEditIcon} onMouseLeave={hideEditIcon} {...props}>
