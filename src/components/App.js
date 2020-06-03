@@ -55,7 +55,12 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} onUpdateText={handleUpdateTodo}>
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            onUpdateText={handleUpdateTodo}
+            onDelete={handleDeleteTodo}
+          >
             {todo.text}
           </Todo>
         ))}

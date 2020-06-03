@@ -1,25 +1,18 @@
 import React, { useState } from 'react'
-<<<<<<< HEAD
 import { FaEdit as EditIcon } from 'react-icons/fa'
 import { MdCancel as CancelIcon } from 'react-icons/md'
-=======
 import { BsTrash as IconDelete } from 'react-icons/bs'
->>>>>>> cambio icono a todo, cambiando tambien la funcion
 import ListItem from 'components/ListItem/ListItem'
 import Input from 'components/Input/Input'
 import Button from 'components/Button/Button'
 
-<<<<<<< HEAD
-const Todo = ({ onUpdateText, id, children, ...props }) => {
-=======
-const Todo = ({ onDelete, children, ...props }) => {
->>>>>>> cambio icono a todo, cambiando tambien la funcion
+const Todo = ({ id, onDelete, onUpdateText, children, ...props }) => {
   const [isMouseOver, setIsMouseOver] = useState(false)
   const [todoText, setTodoText] = useState(children)
   const [isEditing, setIsEditing] = useState(false)
 
-  const showEditIcon = () => setIsMouseOver(true)
-  const hideEditIcon = () => setIsMouseOver(false)
+  const handleMouseEnter = () => setIsMouseOver(true)
+  const handleMouseLeave = () => setIsMouseOver(false)
 
   const editTodo = () => setIsEditing(true)
 
@@ -44,6 +37,8 @@ const Todo = ({ onDelete, children, ...props }) => {
     }
   }
 
+  const handleIconDeleteClick = () => onDelete(id)
+
   const escapeEdit = (event) => {
     if (event.key === 'Escape') {
       cancelEdit()
@@ -67,8 +62,13 @@ const Todo = ({ onDelete, children, ...props }) => {
       <Button onClick={handleSaveButtonClick}>Guardar</Button>
     </>
   ) : (
-    <ListItem onMouseEnter={showEditIcon} onMouseLeave={hideEditIcon} {...props}>
-      {children} {isMouseOver && <EditIcon onClick={editTodo} />}
+    <ListItem {...props} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {children}
+      {isMouseOver && (
+        <>
+          <EditIcon onClick={editTodo} /> <IconDelete onClick={handleIconDeleteClick} />
+        </>
+      )}
     </ListItem>
   )
 }
