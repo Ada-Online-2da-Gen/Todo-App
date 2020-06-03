@@ -32,24 +32,17 @@ const App = () => {
   }
 
   const handleCheckbox = (event, id) => {
-    // const addPending = (event, id, todo) => {
-    //   if (event.target.checked && todo.id === id) {
-    //     todo.status = 'completed'
-    //   } else if (!todo.status) {
-    //     todo.status = 'pending'
-    //   }
-    // }
     const addStatus = todos.map((todo) => {
+      let { status } = todo
       if (event.target.checked && todo.id === id) {
-        todo.status = 'completed'
-      } else if (!todo.status) {
-        todo.status = 'pending'
+        status = 'completed'
+      } else if ((!event.target.checked && todo.id === id) || !status) {
+        status = 'pending'
       }
+      return { ...todo, status }
     })
 
     setTodos(addStatus)
-
-    console.log(todos)
   }
 
   return (
@@ -67,7 +60,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id}>
+          <Todo key={todo.id} id={todo.id} status={todo.status}>
             <Checkbox onChange={(event) => handleCheckbox(event, todo.id)} />
             {todo.text}
           </Todo>
