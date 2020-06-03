@@ -6,44 +6,43 @@ import Input from 'components/Input/Input'
 import Button from 'components/Button/Button'
 
 const Todo = ({ onUpdateText, id, value, children, ...props }) => {
-  const [editing, setEditing] = useState(false)
+  const [isMouseOver, setIsMouseOver] = useState(false)
   const [todoText, setTodoText] = useState(value)
-  const [changeElement, setChangeElement] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
 
-  const showEditIcon = () => setEditing(true)
-  const hideEditIcon = () => setEditing(false)
+  const showEditIcon = () => setIsMouseOver(true)
+  const hideEditIcon = () => setIsMouseOver(false)
 
-  const editTodo = () => setChangeElement(true)
+  const editTodo = () => setIsEditing(true)
 
   const changeTodoText = (event) => setTodoText(event.target.value)
 
   const saveChangesEnter = (event) => {
     if (event.key === 'Enter' && todoText.length > 0) {
       onUpdateText(id, todoText)
-      setChangeElement(false)
+      setIsEditing(false)
     }
   }
 
   const escapeEdit = (event) => {
     if (event.key === 'Escape') {
       setTodoText(value)
-      setChangeElement(false)
+      setIsEditing(false)
     }
   }
 
   const saveChangesBtn = () => {
     if (todoText.length > 0) {
-      onUpdateText(id, todoText)
-      setChangeElement(false)
+      cancelEdit()
     }
   }
 
   const cancelEdit = () => {
     setTodoText(value)
-    setChangeElement(false)
+    setIsEditing(false)
   }
 
-  return changeElement ? (
+  return isEditing ? (
     <>
       <Input
         onChange={changeTodoText}
@@ -57,7 +56,7 @@ const Todo = ({ onUpdateText, id, value, children, ...props }) => {
     </>
   ) : (
     <ListItem onMouseEnter={showEditIcon} onMouseLeave={hideEditIcon} {...props}>
-      {children} {editing && <EditIcon onClick={editTodo} />}
+      {children} {isMouseOver && <EditIcon onClick={editTodo} />}
     </ListItem>
   )
 }
