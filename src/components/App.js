@@ -36,7 +36,7 @@ const App = () => {
     setInput(event.target.value)
   }
 
-  const deleteToDo = (id) => {
+  const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id != id))
   }
 
