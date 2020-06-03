@@ -50,7 +50,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} onDelete={() => handleDeleteTodo(todo.id)}>
+          <Todo key={todo.id} id={todo.id} onDelete={handleDeleteTodo}>
             {todo.text}
           </Todo>
         ))}
