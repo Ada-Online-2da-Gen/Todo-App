@@ -49,11 +49,13 @@ const App = () => {
       </Container>
       <TodoList>
         {input.length !== 0
-          ? filterTodoList.map((todo) => (
-              <Todo key={todo.id} id={todo.id}>
-                {todo.text}
-              </Todo>
-            ))
+          ? filterTodoList.length !== 0
+            ? filterTodoList.map((todo) => (
+                <Todo key={todo.id} id={todo.id}>
+                  {todo.text}
+                </Todo>
+              ))
+            : 'No se encontró ningún todo que coincida con la búsqueda.'
           : todos.map((todo) => (
               <Todo key={todo.id} id={todo.id}>
                 {todo.text}
