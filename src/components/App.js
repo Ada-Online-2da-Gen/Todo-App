@@ -31,7 +31,7 @@ const App = () => {
     setInput(event.target.value)
   }
 
-  const deleteToDo = (id) => {
+  const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id != id))
   }
 
@@ -50,7 +50,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} icon={<BsTrash onClick={() => deleteToDo(todo.id)} />}>
+          <Todo key={todo.id} id={todo.id} icon={<BsTrash onClick={() => deleteTodo(todo.id)} />}>
             {todo.text}
           </Todo>
         ))}
