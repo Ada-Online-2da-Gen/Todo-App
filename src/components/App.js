@@ -32,7 +32,8 @@ const App = () => {
   }
 
   const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id != id))
+    const filterTodos = (todos) => todos.filter((todo) => todo.id !== id)
+    setTodos(filterTodos(todos))
   }
 
   return (
