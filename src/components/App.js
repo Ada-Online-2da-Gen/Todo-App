@@ -6,6 +6,7 @@ import Input from 'components/Input/Input'
 import TodoList from 'components/TodoList/TodoList'
 import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
+import Checkbox from 'components/Checkbox/Checkbox'
 
 import todosList from 'data'
 
@@ -30,6 +31,28 @@ const App = () => {
     setInput(event.target.value)
   }
 
+  const handleCheckbox = (event, id) => {
+    // const addPending = (event, id, todo) => {
+    //   if (event.target.checked && todo.id === id) {
+    //     todo.status = 'completed'
+    //   } else if (!todo.status) {
+    //     todo.status = 'pending'
+    //   }
+    // }
+
+    setTodos(
+      todos.map((todo) => {
+        if (event.target.checked && todo.id === id) {
+          todo.status = 'completed'
+        } else if (!todo.status) {
+          todo.status = 'pending'
+        }
+      })
+    )
+
+    console.log(todos)
+  }
+
   return (
     <Container>
       <Container>
@@ -46,6 +69,7 @@ const App = () => {
       <TodoList>
         {todos.map((todo) => (
           <Todo key={todo.id} id={todo.id}>
+            <Checkbox onChange={(event) => handleCheckbox(event, todo.id)} />
             {todo.text}
           </Todo>
         ))}
