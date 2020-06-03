@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import shortId from 'shortid'
-import { BsTrash as IconDelete } from 'react-icons/bs'
 
 import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'

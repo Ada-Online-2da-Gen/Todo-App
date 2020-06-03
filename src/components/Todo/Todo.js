@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
+<<<<<<< HEAD
 import { FaEdit as EditIcon } from 'react-icons/fa'
 import { MdCancel as CancelIcon } from 'react-icons/md'
+=======
+import { BsTrash as IconDelete } from 'react-icons/bs'
+>>>>>>> cambio icono a todo, cambiando tambien la funcion
 import ListItem from 'components/ListItem/ListItem'
 import Input from 'components/Input/Input'
 import Button from 'components/Button/Button'
 
+<<<<<<< HEAD
 const Todo = ({ onUpdateText, id, children, ...props }) => {
+=======
+const Todo = ({ onDelete, children, ...props }) => {
+>>>>>>> cambio icono a todo, cambiando tambien la funcion
   const [isMouseOver, setIsMouseOver] = useState(false)
   const [todoText, setTodoText] = useState(children)
   const [isEditing, setIsEditing] = useState(false)
