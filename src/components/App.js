@@ -18,6 +18,11 @@ const App = () => {
     setInput('')
   }
 
+  const handleUpdateTodo = (id, text) => {
+    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
+    setTodos(updatedTodos)
+  }
+
   const handleKeyPress = (event) => {
     event.key === 'Enter' && input.length > 0 && addTodo()
   }
@@ -45,7 +50,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id}>
+          <Todo key={todo.id} id={todo.id} onUpdateText={handleUpdateTodo}>
             {todo.text}
           </Todo>
         ))}
