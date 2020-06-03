@@ -18,7 +18,7 @@ const App = () => {
     setInput('')
   }
 
-  const updateTodo = (id, text) => {
+  const handleUpdateTodo = (id, text) => {
     const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
     setTodos(updatedTodos)
   }
@@ -50,7 +50,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} onUpdateText={updateTodo}>
+          <Todo key={todo.id} id={todo.id} onUpdateText={handleUpdateTodo}>
             {todo.text}
           </Todo>
         ))}
