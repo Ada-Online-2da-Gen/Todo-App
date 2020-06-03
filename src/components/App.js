@@ -50,7 +50,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} onUpdateText={updateTodo} value={todo.text}>
+          <Todo key={todo.id} id={todo.id} onUpdateText={updateTodo}>
             {todo.text}
           </Todo>
         ))}

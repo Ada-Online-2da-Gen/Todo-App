@@ -5,9 +5,9 @@ import ListItem from 'components/ListItem/ListItem'
 import Input from 'components/Input/Input'
 import Button from 'components/Button/Button'
 
-const Todo = ({ onUpdateText, id, value, children, ...props }) => {
+const Todo = ({ onUpdateText, id, children, ...props }) => {
   const [isMouseOver, setIsMouseOver] = useState(false)
-  const [todoText, setTodoText] = useState(value)
+  const [todoText, setTodoText] = useState(children)
   const [isEditing, setIsEditing] = useState(false)
 
   const showEditIcon = () => setIsMouseOver(true)
@@ -26,19 +26,19 @@ const Todo = ({ onUpdateText, id, value, children, ...props }) => {
 
   const escapeEdit = (event) => {
     if (event.key === 'Escape') {
-      setTodoText(value)
-      setIsEditing(false)
+      cancelEdit()
     }
   }
 
   const saveChangesBtn = () => {
     if (todoText.length > 0) {
-      cancelEdit()
+      onUpdateText(id, todoText)
+      setIsEditing(false)
     }
   }
 
   const cancelEdit = () => {
-    setTodoText(value)
+    setTodoText(children)
     setIsEditing(false)
   }
 
