@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import shortId from 'shortid'
+import { BsTrash } from 'react-icons/bs'
 
 import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'
@@ -8,7 +9,6 @@ import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
 
 import todosList from 'data'
-import { BsTrash } from 'react-icons/bs'
 
 const App = () => {
   const [todos, setTodos] = useState(todosList)
