@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import shortId from 'shortid'
-import { BsTrash } from 'react-icons/bs'
+import { BsTrash as IconDelete } from 'react-icons/bs'
 
 import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'
@@ -36,7 +36,7 @@ const App = () => {
     setInput(event.target.value)
   }
 
-  const deleteTodo = (id) => {
+  const handleDeleteTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id)
     setTodos(updatedTodos)
   }
