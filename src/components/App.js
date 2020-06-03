@@ -30,6 +30,10 @@ const App = () => {
     setInput(event.target.value)
   }
 
+  const filterTodoList = todos.filter((todo) =>
+    todo.text.toUpperCase().includes(input.toUpperCase())
+  )
+
   return (
     <Container>
       <Container>
@@ -44,11 +48,17 @@ const App = () => {
         </Button>
       </Container>
       <TodoList>
-        {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id}>
-            {todo.text}
-          </Todo>
-        ))}
+        {input.length !== 0
+          ? filterTodoList.map((todo) => (
+              <Todo key={todo.id} id={todo.id}>
+                {todo.text}
+              </Todo>
+            ))
+          : todos.map((todo) => (
+              <Todo key={todo.id} id={todo.id}>
+                {todo.text}
+              </Todo>
+            ))}
       </TodoList>
     </Container>
   )
