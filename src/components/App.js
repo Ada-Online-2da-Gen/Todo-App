@@ -39,16 +39,15 @@ const App = () => {
     //     todo.status = 'pending'
     //   }
     // }
+    const addStatus = todos.map((todo) => {
+      if (event.target.checked && todo.id === id) {
+        todo.status = 'completed'
+      } else if (!todo.status) {
+        todo.status = 'pending'
+      }
+    })
 
-    setTodos(
-      todos.map((todo) => {
-        if (event.target.checked && todo.id === id) {
-          todo.status = 'completed'
-        } else if (!todo.status) {
-          todo.status = 'pending'
-        }
-      })
-    )
+    setTodos(addStatus)
 
     console.log(todos)
   }
