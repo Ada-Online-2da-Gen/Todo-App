@@ -1,11 +1,17 @@
 import React from 'react'
 import ListItem from 'components/ListItem/ListItem'
-import Styles from 'components/Todo/todo.module.scss'
+import Checkbox from 'components/Checkbox/Checkbox'
+import styles from 'components/Todo/todo.module.scss'
 
-const Todo = ({ status, children, ...props }) => {
-  let completedStyles = status === 'completed' ? Styles.completed : Styles.pending
+const Todo = ({ onStatusChange, id, status, children, ...props }) => {
+  const handleCheckboxChange = (event) => {
+    const status = event.target.checked ? 'completed' : 'pending'
+    onStatusChange(status, id)
+  }
+
   return (
-    <ListItem className={completedStyles} {...props}>
+    <ListItem className={styles[status]} {...props}>
+      <Checkbox onChange={handleCheckboxChange} />
       {children}
     </ListItem>
   )

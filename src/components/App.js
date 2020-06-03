@@ -6,7 +6,6 @@ import Input from 'components/Input/Input'
 import TodoList from 'components/TodoList/TodoList'
 import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
-import Checkbox from 'components/Checkbox/Checkbox'
 
 import todosList from 'data'
 
@@ -15,7 +14,7 @@ const App = () => {
   const [input, setInput] = useState('')
 
   const addTodo = () => {
-    setTodos([...todos, { id: shortId.generate(), text: input }])
+    setTodos([...todos, { id: shortId.generate(), text: input, status: 'pending' }])
     setInput('')
   }
 
@@ -31,18 +30,9 @@ const App = () => {
     setInput(event.target.value)
   }
 
-  const handleCheckbox = (event, id) => {
-    const addStatus = todos.map((todo) => {
-      let { status } = todo
-      if (event.target.checked && todo.id === id) {
-        status = 'completed'
-      } else if ((!event.target.checked && todo.id === id) || !status) {
-        status = 'pending'
-      }
-      return { ...todo, status }
-    })
-
-    setTodos(addStatus)
+  const handleStatusChange = (status, id) => {
+    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, status } : todo))
+    setTodos(updatedTodos)
   }
 
   return (
@@ -60,8 +50,7 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} status={todo.status}>
-            <Checkbox onChange={(event) => handleCheckbox(event, todo.id)} />
+          <Todo key={todo.id} id={todo.id} status={todo.status} onStatusChange={handleStatusChange}>
             {todo.text}
           </Todo>
         ))}
