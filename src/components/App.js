@@ -35,6 +35,11 @@ const App = () => {
     setInput(event.target.value)
   }
 
+  const handleDeleteTodo = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id)
+    setTodos(updatedTodos)
+  }
+
   return (
     <Container>
       <Container>
@@ -50,7 +55,12 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} onUpdateText={handleUpdateTodo}>
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            onUpdateText={handleUpdateTodo}
+            onDelete={handleDeleteTodo}
+          >
             {todo.text}
           </Todo>
         ))}
