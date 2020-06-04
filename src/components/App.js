@@ -18,6 +18,11 @@ const App = () => {
     setInput('')
   }
 
+  const handleUpdateTodo = (id, text) => {
+    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
+    setTodos(updatedTodos)
+  }
+
   const handleKeyPress = (event) => {
     event.key === 'Enter' && input.length > 0 && addTodo()
   }
@@ -32,6 +37,11 @@ const App = () => {
 
   const handleStatusChange = (status, id) => {
     const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, status } : todo))
+    setTodos(updatedTodos)
+  }
+
+  const handleDeleteTodo = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id)
     setTodos(updatedTodos)
   }
 
@@ -50,7 +60,14 @@ const App = () => {
       </Container>
       <TodoList>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} status={todo.status} onStatusChange={handleStatusChange}>
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            status={todo.status}
+            onStatusChange={handleStatusChange}
+            onUpdateText={handleUpdateTodo}
+            onDelete={handleDeleteTodo}
+          >
             {todo.text}
           </Todo>
         ))}
