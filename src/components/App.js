@@ -14,7 +14,7 @@ const App = () => {
   const [input, setInput] = useState('')
 
   const addTodo = () => {
-    setTodos([...todos, { id: shortId.generate(), text: input }])
+    setTodos([...todos, { id: shortId.generate(), text: input, status: 'pending' }])
     setInput('')
   }
 
@@ -33,6 +33,11 @@ const App = () => {
 
   const handleChange = (event) => {
     setInput(event.target.value)
+  }
+
+  const handleStatusChange = (status, id) => {
+    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, status } : todo))
+    setTodos(updatedTodos)
   }
 
   const handleDeleteTodo = (id) => {
@@ -58,6 +63,8 @@ const App = () => {
           <Todo
             key={todo.id}
             id={todo.id}
+            status={todo.status}
+            onStatusChange={handleStatusChange}
             onUpdateText={handleUpdateTodo}
             onDelete={handleDeleteTodo}
           >
