@@ -21,9 +21,9 @@ const Todo = ({ id, status, onStatusChange, onDelete, onUpdateText, children, ..
   const handleMouseEnter = () => setIsMouseOver(true)
   const handleMouseLeave = () => setIsMouseOver(false)
 
-  const editTodo = () => setIsEditing(true)
+  const handleEditTodo = () => setIsEditing(true)
 
-  const changeTodoText = (event) => setTodoText(event.target.value)
+  const handleChangeTodoText = (event) => setTodoText(event.target.value)
 
   const finishTodoEdition = () => {
     if (todoText.length > 0) {
@@ -46,26 +46,30 @@ const Todo = ({ id, status, onStatusChange, onDelete, onUpdateText, children, ..
 
   const handleIconDeleteClick = () => onDelete(id)
 
-  const escapeEdit = (event) => {
-    if (event.key === 'Escape') {
-      cancelEdit()
-    }
-  }
-
   const cancelEdit = () => {
     setTodoText(children)
     setIsEditing(false)
   }
 
+  const handleEscapeEdit = (event) => {
+    if (event.key === 'Escape') {
+      cancelEdit()
+    }
+  }
+
+  const handleCancelEdit = () => {
+    cancelEdit()
+  }
+
   return isEditing ? (
     <>
       <Input
-        onChange={changeTodoText}
+        onChange={handleChangeTodoText}
         onKeyPress={handleKeyPress}
-        onKeyDown={escapeEdit}
+        onKeyDown={handleEscapeEdit}
         value={todoText}
       />
-      <CancelIcon onClick={cancelEdit} />
+      <CancelIcon onClick={handleCancelEdit} />
       <Button onClick={handleSaveButtonClick}>Guardar</Button>
     </>
   ) : (
@@ -79,7 +83,7 @@ const Todo = ({ id, status, onStatusChange, onDelete, onUpdateText, children, ..
       {children}
       {isMouseOver && (
         <>
-          <EditIcon onClick={editTodo} /> <IconDelete onClick={handleIconDeleteClick} />
+          <EditIcon onClick={handleEditTodo} /> <IconDelete onClick={handleIconDeleteClick} />
         </>
       )}
     </ListItem>
