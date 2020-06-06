@@ -1,0 +1,33 @@
+.main-container {
+  margin: 50px;
+}
+
+.add-todo-input {
+  height: 50px;
+  width: 400px;
+  border-radius: 3px;
+  border-style: none;
+  background-color: #bac1b8;
+  font-size: 18px;
+  font-family: 'Open Sans';
+  padding-left: 15px;
+}
+
+.save-btn {
+  background-color: #0c7c59;
+  width: 150px;
+  height: 50px;
+  margin-left: 30px;
+  border-radius: 40px;
+  border-style: none;
+  color: #ebf5ee;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 3px;
+
+  &:hover {
+    border: 1px dotted #ebf5ee;
+    background: none;
+    transition: 0.3s;
+  }
+}

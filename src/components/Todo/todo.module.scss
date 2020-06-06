@@ -1,7 +1,115 @@
 .completed {
   color: grey;
   text-decoration: line-through;
+  text-decoration-color: black;
 }
 .pending {
-  color: black;
+  color: #ebf5ee;
+}
+
+.todo {
+  position: relative;
+  font-family: 'Open Sans';
+  background-color: #4f5b66;
+  border-radius: 5px;
+  width: 60%;
+  min-height: 50px;
+  padding: 5px 60px 5px 20px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.icon-wrapper {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ebf5ee;
+}
+
+.save-btn {
+  width: 115px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  color: #ebf5ee;
+  font-family: 'Open Sans';
+  font-weight: 500;
+  background-color: #0c7c59;
+  letter-spacing: 1px;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    transition: 0.2s;
+    letter-spacing: 2px;
+  }
+}
+
+.cancel-icon {
+  cursor: pointer;
+  font-size: 26px;
+  color: firebrick;
+  margin: 0 10px;
+}
+
+.input-wraper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.todo-edit {
+  border-style: none;
+  font-family: 'Open Sans';
+  font-size: 16px;
+  padding-left: 57px;
+  color: #ebf5ee;
+}
+
+.checkbox {
+  margin-right: 20px;
+  cursor: pointer;
+  z-index: 200;
+  opacity: 0;
+
+  &:checked ~ .checkbox-custom {
+    background-color: #088036;
+  }
+
+  &:checked ~ .checkbox-custom::after {
+    opacity: 1;
+  }
+}
+
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ebf5ee;
+  position: absolute;
+  border-radius: 3px;
+
+  &::after {
+    position: absolute;
+    content: '';
+    left: 6px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border-radius: 5px;
+    border: 1px solid #ebf5ee;
+    border-width: 0 2px 2px 0;
+    border-radius: 0;
+    -webkit-transform: rotate(45deg) scale(1);
+    -ms-transform: rotate(45deg) scale(1);
+    transform: rotate(45deg) scale(1);
+    opacity: 0;
+    transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    -ms-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+  }
 }
