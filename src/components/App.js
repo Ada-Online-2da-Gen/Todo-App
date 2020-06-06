@@ -6,6 +6,7 @@ import Input from 'components/Input/Input'
 import TodoList from 'components/TodoList/TodoList'
 import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
+import styles from 'components/app.module.scss'
 
 import todosList from 'data'
 
@@ -46,16 +47,17 @@ const App = () => {
   }
 
   return (
-    <Container>
+    <Container className={styles['main-container']}>
       <Container>
         <Input
+          className={styles['add-todo-input']}
           value={input}
           onKeyPress={handleKeyPress}
           onChange={handleChange}
           placeholder="Ingrese una nueva tarea"
         />
-        <Button className="button" onClick={handleClick}>
-          Agregar
+        <Button className={styles['save-btn']} onClick={handleClick}>
+          AGREGAR
         </Button>
       </Container>
       <TodoList>
