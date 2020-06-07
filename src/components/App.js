@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { React, useState } from 'react'
 import shortId from 'shortid'
 
 import Container from 'components/Container/Container'
@@ -26,11 +26,13 @@ const App = () => {
   const addTodo = () => {
     setTodos([...todos, { id: shortId.generate(), title: input, status: 'pending' }])
     setInput('')
+    setCopiaTodos(todos)
   }
 
   const handleUpdateTodo = (id, title) => {
     const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, title } : todo))
     setTodos(updatedTodos)
+    setCopiaTodos(updatedTodos)
   }
 
   const handleKeyPress = (event) => {
@@ -54,6 +56,7 @@ const App = () => {
   const handleDeleteTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id)
     setTodos(updatedTodos)
+    setCopiaTodos(updatedTodos)
   }
 
   const handleDetailsTodoClick = (id) => {
