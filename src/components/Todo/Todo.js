@@ -9,7 +9,16 @@ import Input from 'components/Input/Input'
 import Button from 'components/Button/Button'
 import Container from 'components/Container/Container'
 
-const Todo = ({ id, status, onStatusChange, onDelete, onUpdateText, children, ...props }) => {
+const Todo = ({
+  id,
+  status,
+  onStatusChange,
+  onDelete,
+  onUpdateText,
+  onClickDetailsTodo,
+  children,
+  ...props
+}) => {
   const [isMouseOver, setIsMouseOver] = useState(false)
   const [todoText, setTodoText] = useState(children)
   const [isEditing, setIsEditing] = useState(false)
@@ -62,6 +71,8 @@ const Todo = ({ id, status, onStatusChange, onDelete, onUpdateText, children, ..
     cancelEdit()
   }
 
+  const handleDetailsTodo = () => onClickDetailsTodo(id)
+
   return isEditing ? (
     <Container className={styles['input-wraper']}>
       <Input
@@ -82,6 +93,7 @@ const Todo = ({ id, status, onStatusChange, onDelete, onUpdateText, children, ..
       className={`${styles[status]} ${styles.todo}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleDetailsTodo}
     >
       <Checkbox onChange={handleCheckboxChange} className={styles.checkbox} />
       <span className={styles['checkbox-custom']} />

@@ -6,6 +6,7 @@ import Input from 'components/Input/Input'
 import TodoList from 'components/TodoList/TodoList'
 import Todo from 'components/Todo/Todo'
 import Button from 'components/Button/Button'
+import Modal from 'components/Modal/Modal'
 import styles from 'components/app.module.scss'
 
 import todosList from 'data'
@@ -13,6 +14,8 @@ import todosList from 'data'
 const App = () => {
   const [todos, setTodos] = useState(todosList)
   const [input, setInput] = useState('')
+  const [isModalShow, setIsModalShow] = useState(false)
+  const [todoModal, setTodoModal] = useState({})
 
   const addTodo = () => {
     setTodos([...todos, { id: shortId.generate(), text: input, status: 'pending' }])
@@ -46,6 +49,16 @@ const App = () => {
     setTodos(updatedTodos)
   }
 
+  const handleModal = (id) => {
+    const selectedTodo = todos.find((todo) => todo.id === id)
+    setTodoModal(selectedTodo)
+  }
+
+  const handleClickDetailsTodo = (id) => {
+    setIsModalShow(!isModalShow)
+    handleModal(id)
+  }
+
   return (
     <Container className={styles['main-container']}>
       <Container>
@@ -69,11 +82,13 @@ const App = () => {
             onStatusChange={handleStatusChange}
             onUpdateText={handleUpdateTodo}
             onDelete={handleDeleteTodo}
+            onClickDetailsTodo={handleClickDetailsTodo}
           >
             {todo.text}
           </Todo>
         ))}
       </TodoList>
+      {isModalShow && <Modal item={todoModal} onCloseModal={handleClickDetailsTodo} />}
     </Container>
   )
 }
