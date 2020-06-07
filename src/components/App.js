@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import React, { useState } from 'react'
 import shortId from 'shortid'
 
 import Container from 'components/Container/Container'
@@ -21,18 +21,16 @@ const App = () => {
   const [isModalShown, setIsModalShown] = useState(false)
   const [todoModal, setTodoModal] = useState({})
 
-  const [copiaTodos, setCopiaTodos] = useState(todos)
+  const [filterTodos, setFilterTodos] = useState('all')
 
   const addTodo = () => {
     setTodos([...todos, { id: shortId.generate(), title: input, status: 'pending' }])
     setInput('')
-    setCopiaTodos(todos)
   }
 
   const handleUpdateTodo = (id, title) => {
     const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, title } : todo))
     setTodos(updatedTodos)
-    setCopiaTodos(updatedTodos)
   }
 
   const handleKeyPress = (event) => {
@@ -50,13 +48,11 @@ const App = () => {
   const handleStatusChange = (status, id) => {
     const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, status } : todo))
     setTodos(updatedTodos)
-    setCopiaTodos(updatedTodos)
   }
 
   const handleDeleteTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id)
     setTodos(updatedTodos)
-    setCopiaTodos(updatedTodos)
   }
 
   const handleDetailsTodoClick = (id) => {
@@ -68,11 +64,11 @@ const App = () => {
   const handleCloseModal = () => setIsModalShown(false)
 
   const handleSelectFilterChange = (event) => {
-    if (event.target.value !== 'all') {
-      setTodos([...copiaTodos].filter((todo) => todo.status === event.target.value))
-    } else if (event.target.value === 'all') {
-      setTodos([...copiaTodos])
-    }
+    setFilterTodos(event.target.value)
+  }
+
+  const filterTodosStatus = (todo) => {
+    return filterTodos === 'all' ? true : todo.status === filterTodos
   }
 
   return (
@@ -104,7 +100,7 @@ const App = () => {
         </Select>
       </Container>
       <TodoList>
-        {todos.map((todo) => (
+        {todos.filter(filterTodosStatus).map((todo) => (
           <Todo
             key={todo.id}
             id={todo.id}
