@@ -5,19 +5,17 @@ import Text from 'components/Text/Text'
 import Container from 'components/Container/Container'
 import styles from 'components/Modal/modal.module.scss'
 
-const Modal = ({ item, onCloseModal, ...props }) => {
-  const handleClick = () => onCloseModal()
-  const ESTADO = {
-    pending: 'pendiente',
-    completed: 'completada'
-  }
+const TODO_STATUS = {
+  pending: 'pendiente',
+  completed: 'completada'
+}
+const Modal = ({ item, onClose, ...props }) => {
   return (
-    <Container className={styles.background} onClick={onCloseModal}>
+    <Container className={styles.overlay} onClick={onClose}>
       <Container className={styles.modalContainer}>
-        {console.log(item)}
         <Title>Titulo: {item.text}</Title>
-        <CloseIcon className={styles.closeIcon} onClick={handleClick} />
-        <Text>Estado: {ESTADO[item.status]}</Text>
+        <CloseIcon className={styles.closeIcon} onClick={onClose} />
+        <Text>Estado: {TODO_STATUS[item.status]}</Text>
       </Container>
     </Container>
   )

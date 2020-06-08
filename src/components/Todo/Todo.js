@@ -15,7 +15,7 @@ const Todo = ({
   onStatusChange,
   onDelete,
   onUpdateText,
-  onClickDetailsTodo,
+  onDetailsTodoClick,
   children,
   ...props
 }) => {
@@ -71,7 +71,7 @@ const Todo = ({
     cancelEdit()
   }
 
-  const handleDetailsTodo = () => onClickDetailsTodo(id)
+  const handleDetailsTodoClick = () => onDetailsTodoClick(id)
 
   return isEditing ? (
     <Container className={styles['input-wraper']}>
@@ -93,7 +93,7 @@ const Todo = ({
       className={`${styles[status]} ${styles.todo}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleDetailsTodo}
+      onClick={handleDetailsTodoClick}
     >
       <Checkbox onChange={handleCheckboxChange} className={styles.checkbox} />
       <span className={styles['checkbox-custom']} />

@@ -14,7 +14,7 @@ import todosList from 'data'
 const App = () => {
   const [todos, setTodos] = useState(todosList)
   const [input, setInput] = useState('')
-  const [isModalShow, setIsModalShow] = useState(false)
+  const [isModalShown, setIsModalShown] = useState(false)
   const [todoModal, setTodoModal] = useState({})
 
   const addTodo = () => {
@@ -49,15 +49,13 @@ const App = () => {
     setTodos(updatedTodos)
   }
 
-  const handleModal = (id) => {
+  const handleDetailsTodoClick = (id) => {
     const selectedTodo = todos.find((todo) => todo.id === id)
     setTodoModal(selectedTodo)
+    setIsModalShown(true)
   }
 
-  const handleClickDetailsTodo = (id) => {
-    setIsModalShow(!isModalShow)
-    handleModal(id)
-  }
+  const handleCloseModal = () => setIsModalShown(false)
 
   return (
     <Container className={styles['main-container']}>
@@ -82,13 +80,13 @@ const App = () => {
             onStatusChange={handleStatusChange}
             onUpdateText={handleUpdateTodo}
             onDelete={handleDeleteTodo}
-            onClickDetailsTodo={handleClickDetailsTodo}
+            onDetailsTodoClick={handleDetailsTodoClick}
           >
             {todo.text}
           </Todo>
         ))}
       </TodoList>
-      {isModalShow && <Modal item={todoModal} onCloseModal={handleClickDetailsTodo} />}
+      {isModalShown && <Modal item={todoModal} onClose={handleCloseModal} />}
     </Container>
   )
 }
