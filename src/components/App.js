@@ -21,7 +21,7 @@ const App = () => {
   const [isModalShown, setIsModalShown] = useState(false)
   const [todoModal, setTodoModal] = useState({})
 
-  const [filterTodos, setFilterTodos] = useState('all')
+  const [statusFilter, setStatusFilter] = useState('all')
 
   const addTodo = () => {
     setTodos([...todos, { id: shortId.generate(), title: input, status: 'pending' }])
@@ -64,11 +64,11 @@ const App = () => {
   const handleCloseModal = () => setIsModalShown(false)
 
   const handleSelectFilterChange = (event) => {
-    setFilterTodos(event.target.value)
+    setStatusFilter(event.target.value)
   }
 
-  const filterTodosStatus = (todo) => {
-    return filterTodos === 'all' ? true : todo.status === filterTodos
+  const statusFilterStatus = (todo) => {
+    return statusFilter === 'all' ? true : todo.status === statusFilter
   }
 
   return (
@@ -100,7 +100,7 @@ const App = () => {
         </Select>
       </Container>
       <TodoList>
-        {todos.filter(filterTodosStatus).map((todo) => (
+        {todos.filter(statusFilterStatus).map((todo) => (
           <Todo
             key={todo.id}
             id={todo.id}
