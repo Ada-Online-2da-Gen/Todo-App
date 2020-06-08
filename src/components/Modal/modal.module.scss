@@ -1,0 +1,27 @@
+.modalContainer {
+  width: 60vw;
+  height: 60vh;
+  padding-left: 30px;
+  background-color: rgb(255, 255, 255);
+}
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(0.5rem);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
