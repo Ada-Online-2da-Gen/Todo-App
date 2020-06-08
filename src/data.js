@@ -3,17 +3,17 @@ import shortId from 'shortid'
 export default [
   {
     id: shortId.generate(),
-    text: 'Ir al súper',
+    title: 'Ir al súper',
     status: 'pending'
   },
   {
     id: shortId.generate(),
-    text: 'Comprar comida',
+    title: 'Comprar comida',
     status: 'pending'
   },
   {
     id: shortId.generate(),
-    text: 'Preparar cena',
+    title: 'Preparar cena',
     status: 'pending'
   }
 ]

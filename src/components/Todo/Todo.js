@@ -14,13 +14,13 @@ const Todo = ({
   status,
   onStatusChange,
   onDelete,
-  onUpdateText,
+  onUpdateTitle,
   onDetailsTodoClick,
   children,
   ...props
 }) => {
   const [isMouseOver, setIsMouseOver] = useState(false)
-  const [todoText, setTodoText] = useState(children)
+  const [todoTitle, setTodoTitle] = useState(children)
   const [isEditing, setIsEditing] = useState(false)
 
   const handleCheckboxChange = (event) => {
@@ -33,11 +33,11 @@ const Todo = ({
 
   const handleEditTodo = () => setIsEditing(true)
 
-  const handleChangeTodoText = (event) => setTodoText(event.target.value)
+  const handleChangeTodoTitle = (event) => setTodoTitle(event.target.value)
 
   const finishTodoEdition = () => {
-    if (todoText.length > 0) {
-      onUpdateText(id, todoText)
+    if (todoTitle.length > 0) {
+      onUpdateTitle(id, todoTitle)
       setIsEditing(false)
     }
   }
@@ -49,7 +49,7 @@ const Todo = ({
   }
 
   const handleSaveButtonClick = () => {
-    if (todoText.length > 0) {
+    if (todoTitle.length > 0) {
       finishTodoEdition()
     }
   }
@@ -57,7 +57,7 @@ const Todo = ({
   const handleIconDeleteClick = () => onDelete(id)
 
   const cancelEdit = () => {
-    setTodoText(children)
+    setTodoTitle(children)
     setIsEditing(false)
   }
 
@@ -76,10 +76,10 @@ const Todo = ({
   return isEditing ? (
     <Container className={styles['input-wraper']}>
       <Input
-        onChange={handleChangeTodoText}
+        onChange={handleChangeTodoTitle}
         onKeyPress={handleKeyPress}
         onKeyDown={handleEscapeEdit}
-        value={todoText}
+        value={todoTitle}
         className={`${styles.todo} ${styles['todo-edit']}`}
       />
       <CancelIcon onClick={handleCancelEdit} className={styles['cancel-icon']} />
