@@ -13,7 +13,7 @@ const Modal = ({ item, onClose, ...props }) => {
   return (
     <Container className={styles.overlay} onClick={onClose}>
       <Container className={styles.modalContainer}>
-        <Title>Titulo: {item.text}</Title>
+        <Title>Titulo: {item.title}</Title>
         <CloseIcon className={styles.closeIcon} onClick={onClose} />
         <Text>Estado: {TODO_STATUS[item.status]}</Text>
       </Container>

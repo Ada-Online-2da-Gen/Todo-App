@@ -18,12 +18,12 @@ const App = () => {
   const [todoModal, setTodoModal] = useState({})
 
   const addTodo = () => {
-    setTodos([...todos, { id: shortId.generate(), text: input, status: 'pending' }])
+    setTodos([...todos, { id: shortId.generate(), title: input, status: 'pending' }])
     setInput('')
   }
 
-  const handleUpdateTodo = (id, text) => {
-    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
+  const handleUpdateTodo = (id, title) => {
+    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, title } : todo))
     setTodos(updatedTodos)
   }
 
@@ -78,11 +78,11 @@ const App = () => {
             id={todo.id}
             status={todo.status}
             onStatusChange={handleStatusChange}
-            onUpdateText={handleUpdateTodo}
+            onTitleUpdate={handleUpdateTodo}
             onDelete={handleDeleteTodo}
             onDetailsTodoClick={handleDetailsTodoClick}
           >
-            {todo.text}
+            {todo.title}
           </Todo>
         ))}
       </TodoList>
