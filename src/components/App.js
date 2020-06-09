@@ -5,8 +5,12 @@ import Container from 'components/Container/Container'
 import Input from 'components/Input/Input'
 import TodoList from 'components/TodoList/TodoList'
 import Todo from 'components/Todo/Todo'
+import Text from 'components/Text/Text'
 import Button from 'components/Button/Button'
 import Modal from 'components/Modal/Modal'
+import Select from 'components/Select/Select'
+import Option from 'components/Option/Option'
+
 import styles from 'components/app.module.scss'
 
 import todosList from 'data'
@@ -16,6 +20,8 @@ const App = () => {
   const [input, setInput] = useState('')
   const [isModalShown, setIsModalShown] = useState(false)
   const [todoModal, setTodoModal] = useState({})
+
+  const [statusFilter, setStatusFilter] = useState('all')
 
   const addTodo = () => {
     setTodos([...todos, { id: shortId.generate(), title: input, status: 'pending' }])
@@ -57,6 +63,14 @@ const App = () => {
 
   const handleCloseModal = () => setIsModalShown(false)
 
+  const handleSelectFilterChange = (event) => {
+    setStatusFilter(event.target.value)
+  }
+
+  const filterTodosByStatus = (todo) => {
+    return statusFilter === 'all' ? true : todo.status === statusFilter
+  }
+
   return (
     <Container className={styles['main-container']}>
       <Container>
@@ -71,8 +85,22 @@ const App = () => {
           AGREGAR
         </Button>
       </Container>
+      <Container>
+        <Text>Filtrar</Text>
+        <Select onChange={handleSelectFilterChange}>
+          <Option id="all" value="all">
+            Todas
+          </Option>
+          <Option id="completed" value="completed">
+            Completadas
+          </Option>
+          <Option id="pending" value="pending">
+            Pendientes
+          </Option>
+        </Select>
+      </Container>
       <TodoList>
-        {todos.map((todo) => (
+        {todos.filter(filterTodosByStatus).map((todo) => (
           <Todo
             key={todo.id}
             id={todo.id}
