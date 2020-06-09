@@ -14,13 +14,13 @@ const Todo = ({
   status,
   onStatusChange,
   onDelete,
-  onUpdateTitle,
+  onTitleUpdate,
   onDetailsTodoClick,
   children,
   ...props
 }) => {
   const [isMouseOver, setIsMouseOver] = useState(false)
-  const [todoTitle, setTodoTitle] = useState(children)
+  const [title, setTitle] = useState(children)
   const [isEditing, setIsEditing] = useState(false)
 
   const handleCheckboxChange = (event) => {
@@ -33,11 +33,11 @@ const Todo = ({
 
   const handleEditTodo = () => setIsEditing(true)
 
-  const handleChangeTodoTitle = (event) => setTodoTitle(event.target.value)
+  const handleChangeTodoTitle = (event) => setTitle(event.target.value)
 
   const finishTodoEdition = () => {
-    if (todoTitle.length > 0) {
-      onUpdateTitle(id, todoTitle)
+    if (title.length > 0) {
+      onTitleUpdate(id, title)
       setIsEditing(false)
     }
   }
@@ -49,7 +49,7 @@ const Todo = ({
   }
 
   const handleSaveButtonClick = () => {
-    if (todoTitle.length > 0) {
+    if (title.length > 0) {
       finishTodoEdition()
     }
   }
@@ -57,7 +57,7 @@ const Todo = ({
   const handleIconDeleteClick = () => onDelete(id)
 
   const cancelEdit = () => {
-    setTodoTitle(children)
+    setTitle(children)
     setIsEditing(false)
   }
 
@@ -79,7 +79,7 @@ const Todo = ({
         onChange={handleChangeTodoTitle}
         onKeyPress={handleKeyPress}
         onKeyDown={handleEscapeEdit}
-        value={todoTitle}
+        value={title}
         className={`${styles.todo} ${styles['todo-edit']}`}
       />
       <CancelIcon onClick={handleCancelEdit} className={styles['cancel-icon']} />

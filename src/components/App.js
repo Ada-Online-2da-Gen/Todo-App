@@ -78,7 +78,7 @@ const App = () => {
             id={todo.id}
             status={todo.status}
             onStatusChange={handleStatusChange}
-            onUpdateTitle={handleUpdateTodo}
+            onTitleUpdate={handleUpdateTodo}
             onDelete={handleDeleteTodo}
             onDetailsTodoClick={handleDetailsTodoClick}
           >
