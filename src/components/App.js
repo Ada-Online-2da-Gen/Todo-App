@@ -67,7 +67,7 @@ const App = () => {
     setStatusFilter(event.target.value)
   }
 
-  const statusFilterStatus = (todo) => {
+  const filterTodosByStatus = (todo) => {
     return statusFilter === 'all' ? true : todo.status === statusFilter
   }
 
@@ -100,7 +100,7 @@ const App = () => {
         </Select>
       </Container>
       <TodoList>
-        {todos.filter(statusFilterStatus).map((todo) => (
+        {todos.filter(filterTodosByStatus).map((todo) => (
           <Todo
             key={todo.id}
             id={todo.id}
