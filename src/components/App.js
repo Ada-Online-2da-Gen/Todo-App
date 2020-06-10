@@ -15,44 +15,39 @@ import styles from 'components/app.module.scss'
 
 import todosList from 'data'
 
+import useInput from 'components/hooks/useInput'
+import useArray from 'components/hooks/useArray'
+
 const App = () => {
-  const [todos, setTodos] = useState(todosList)
-  const [input, setInput] = useState('')
   const [isModalShown, setIsModalShown] = useState(false)
   const [todoModal, setTodoModal] = useState({})
-
+  const [value, update, clear] = useInput('')
+  const [todos, methods] = useArray(todosList)
   const [statusFilter, setStatusFilter] = useState('all')
 
   const addTodo = () => {
-    setTodos([...todos, { id: shortId.generate(), title: input, status: 'pending' }])
-    setInput('')
+    methods.add({ id: shortId.generate(), title: value, status: 'pending' })
+    clear()
   }
 
   const handleUpdateTodo = (id, title) => {
-    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, title } : todo))
-    setTodos(updatedTodos)
+    methods.updateById(id, { title })
   }
 
   const handleKeyPress = (event) => {
-    event.key === 'Enter' && input.length > 0 && addTodo()
+    event.key === 'Enter' && value.length > 0 && addTodo()
   }
 
   const handleClick = (event) => {
-    event.type === 'click' && input.length > 0 && addTodo()
+    event.type === 'click' && value.length > 0 && addTodo()
   }
 
-  const handleChange = (event) => {
-    setInput(event.target.value)
-  }
-
-  const handleStatusChange = (status, id) => {
-    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, status } : todo))
-    setTodos(updatedTodos)
+  const handleStatusChange = (id, status) => {
+    methods.updateById(id, { status })
   }
 
   const handleDeleteTodo = (id) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== id)
-    setTodos(updatedTodos)
+    methods.removeById(id)
   }
 
   const handleDetailsTodoClick = (id) => {
@@ -76,9 +71,9 @@ const App = () => {
       <Container>
         <Input
           className={styles['add-todo-input']}
-          value={input}
+          value={value}
           onKeyPress={handleKeyPress}
-          onChange={handleChange}
+          onChange={update}
           placeholder="Ingrese una nueva tarea"
         />
         <Button className={styles['save-btn']} onClick={handleClick}>

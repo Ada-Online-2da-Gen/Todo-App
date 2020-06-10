@@ -25,7 +25,7 @@ const Todo = ({
 
   const handleCheckboxChange = (event) => {
     const status = event.target.checked ? 'completed' : 'pending'
-    onStatusChange(status, id)
+    onStatusChange(id, status)
   }
 
   const handleMouseEnter = () => setIsMouseOver(true)
