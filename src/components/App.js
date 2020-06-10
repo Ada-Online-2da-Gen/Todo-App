@@ -71,6 +71,8 @@ const App = () => {
     return statusFilter === 'all' ? true : todo.status === statusFilter
   }
 
+  const pendingTodos = todos.filter((todo) => todo.status === 'pending').length
+
   return (
     <Container className={styles['main-container']}>
       <Container>
@@ -84,6 +86,9 @@ const App = () => {
         <Button className={styles['save-btn']} onClick={handleClick}>
           AGREGAR
         </Button>
+      </Container>
+      <Container>
+        <Text>Cantidad de pendientes: {pendingTodos}</Text>
       </Container>
       <Container>
         <Text>Filtrar</Text>
