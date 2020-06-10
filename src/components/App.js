@@ -71,6 +71,11 @@ const App = () => {
     return statusFilter === 'all' ? true : todo.status === statusFilter
   }
 
+  const handleDeleteCompletedButtonClick = () => {
+    const updatedTodos = todos.filter((todo) => todo.status !== 'completed')
+    setTodos(updatedTodos)
+  }
+
   return (
     <Container className={styles['main-container']}>
       <Container>
@@ -98,7 +103,11 @@ const App = () => {
             Pendientes
           </Option>
         </Select>
+        <Button className={styles['save-btn']} onClick={handleDeleteCompletedButtonClick}>
+          Borrar Completadas
+        </Button>
       </Container>
+
       <TodoList>
         {todos.filter(filterTodosByStatus).map((todo) => (
           <Todo
