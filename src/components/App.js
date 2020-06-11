@@ -15,44 +15,39 @@ import styles from 'components/app.module.scss'
 
 import todosList from 'data'
 
+import useInput from 'components/hooks/useInput'
+import useArray from 'components/hooks/useArray'
+
 const App = () => {
-  const [todos, setTodos] = useState(todosList)
-  const [input, setInput] = useState('')
   const [isModalShown, setIsModalShown] = useState(false)
   const [todoModal, setTodoModal] = useState({})
-
+  const [todoInput, updateTodoInput, clearTodoInput] = useInput('')
+  const [todos, todoActions] = useArray(todosList)
   const [statusFilter, setStatusFilter] = useState('all')
 
   const addTodo = () => {
-    setTodos([...todos, { id: shortId.generate(), title: input, status: 'pending' }])
-    setInput('')
+    todoActions.add({ id: shortId.generate(), title: todoInput, status: 'pending' })
+    clearTodoInput()
   }
 
   const handleUpdateTodo = (id, title) => {
-    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, title } : todo))
-    setTodos(updatedTodos)
+    todoActions.updateById(id, { title })
   }
 
   const handleKeyPress = (event) => {
-    event.key === 'Enter' && input.length > 0 && addTodo()
+    event.key === 'Enter' && todoInput.length > 0 && addTodo()
   }
 
   const handleClick = (event) => {
-    event.type === 'click' && input.length > 0 && addTodo()
+    event.type === 'click' && todoInput.length > 0 && addTodo()
   }
 
-  const handleChange = (event) => {
-    setInput(event.target.value)
-  }
-
-  const handleStatusChange = (status, id) => {
-    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, status } : todo))
-    setTodos(updatedTodos)
+  const handleStatusChange = (id, status) => {
+    todoActions.updateById(id, { status })
   }
 
   const handleDeleteTodo = (id) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== id)
-    setTodos(updatedTodos)
+    todoActions.removeById(id)
   }
 
   const handleDetailsTodoClick = (id) => {
@@ -81,9 +76,9 @@ const App = () => {
       <Container>
         <Input
           className={styles['add-todo-input']}
-          value={input}
+          value={todoInput}
           onKeyPress={handleKeyPress}
-          onChange={handleChange}
+          onChange={updateTodoInput}
           placeholder="Ingrese una nueva tarea"
         />
         <Button className={styles['save-btn']} onClick={handleClick}>
