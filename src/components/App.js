@@ -21,33 +21,33 @@ import useArray from 'components/hooks/useArray'
 const App = () => {
   const [isModalShown, setIsModalShown] = useState(false)
   const [todoModal, setTodoModal] = useState({})
-  const [value, update, clear] = useInput('')
-  const [todos, methods] = useArray(todosList)
+  const [todoInput, updateTodoInput, clearTodoInput] = useInput('')
+  const [todos, todoActions] = useArray(todosList)
   const [statusFilter, setStatusFilter] = useState('all')
 
   const addTodo = () => {
-    methods.add({ id: shortId.generate(), title: value, status: 'pending' })
-    clear()
+    todoActions.add({ id: shortId.generate(), title: todoInput, status: 'pending' })
+    clearTodoInput()
   }
 
   const handleUpdateTodo = (id, title) => {
-    methods.updateById(id, { title })
+    todoActions.updateById(id, { title })
   }
 
   const handleKeyPress = (event) => {
-    event.key === 'Enter' && value.length > 0 && addTodo()
+    event.key === 'Enter' && todoInput.length > 0 && addTodo()
   }
 
   const handleClick = (event) => {
-    event.type === 'click' && value.length > 0 && addTodo()
+    event.type === 'click' && todoInput.length > 0 && addTodo()
   }
 
   const handleStatusChange = (id, status) => {
-    methods.updateById(id, { status })
+    todoActions.updateById(id, { status })
   }
 
   const handleDeleteTodo = (id) => {
-    methods.removeById(id)
+    todoActions.removeById(id)
   }
 
   const handleDetailsTodoClick = (id) => {
@@ -71,9 +71,9 @@ const App = () => {
       <Container>
         <Input
           className={styles['add-todo-input']}
-          value={value}
+          value={todoInput}
           onKeyPress={handleKeyPress}
-          onChange={update}
+          onChange={updateTodoInput}
           placeholder="Ingrese una nueva tarea"
         />
         <Button className={styles['save-btn']} onClick={handleClick}>
