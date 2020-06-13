@@ -12,7 +12,7 @@ const useArray = (initialState) => {
     setItems(updatedItems)
   }
 
-  const updateById = (id, newProperties) => {
+  const updateTodoById = (id, newProperties) => {
     const updatedItems = items.map((item) =>
       item.id === id ? { ...item, ...newProperties } : item
     )
@@ -34,9 +34,10 @@ const useArray = (initialState) => {
       add,
       getById,
       replaceById,
-      updateById,
+      updateTodoById,
       removeById,
-      clear
+      clear,
+      updateAll: setItems
     }
   ]
 }
