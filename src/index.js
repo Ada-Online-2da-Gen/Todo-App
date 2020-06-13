@@ -2,11 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from 'components/App'
 import 'styles/main.scss'
+import { TodoProvider } from 'contexts/TodoContext'
+import { ModalProvider } from 'contexts/ModalContext'
 // import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ModalProvider>
+      <TodoProvider>
+        <App />
+      </TodoProvider>
+    </ModalProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )

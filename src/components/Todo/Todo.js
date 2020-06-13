@@ -24,6 +24,7 @@ const Todo = ({
   const [isEditing, setIsEditing] = useState(false)
 
   const handleCheckboxChange = (event) => {
+    event.stopPropagation()
     const status = event.target.checked ? 'completed' : 'pending'
     onStatusChange(id, status)
   }

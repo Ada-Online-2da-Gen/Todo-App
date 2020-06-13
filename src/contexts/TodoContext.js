@@ -30,7 +30,8 @@ const TodoProvider = ({ children }) => {
         removeTodoById: todoActions.removeById,
         statusFilter,
         setStatusFilter,
-        getPendingTodos
+        getPendingTodos,
+        todoActions
       }}
     >
       {children}

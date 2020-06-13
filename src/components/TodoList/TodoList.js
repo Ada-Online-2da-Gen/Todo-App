@@ -2,9 +2,11 @@ import React, { useContext } from 'react'
 import List from 'components/List/List'
 import Todo from 'components/Todo/Todo'
 import TodoContext from 'contexts/TodoContext'
+import ModalContext from 'contexts/ModalContext'
 
 const TodoList = ({ ...props }) => {
   const { todos, updateTodoById, removeTodoById, statusFilter } = useContext(TodoContext)
+  const { showModal, setTodoModal } = useContext(ModalContext)
 
   const handleUpdateTodo = (id, title) => {
     updateTodoById(id, { title })
@@ -19,9 +21,9 @@ const TodoList = ({ ...props }) => {
   }
 
   const handleDetailsTodoClick = (id) => {
-    //const selectedTodo = todos.find((todo) => todo.id === id)
-    //setTodoModal(selectedTodo)
-    //setIsModalShown(true)
+    const selectedTodo = todos.find((todo) => todo.id === id)
+    setTodoModal(selectedTodo)
+    showModal()
   }
 
   const filterTodosByStatus = (todo) => {
