@@ -32,7 +32,10 @@ const Todo = ({
   const handleMouseEnter = () => setIsMouseOver(true)
   const handleMouseLeave = () => setIsMouseOver(false)
 
-  const handleEditTodo = () => setIsEditing(true)
+  const handleEditTodo = (event) => {
+    event.stopPropagation()
+    setIsEditing(true)
+  }
 
   const handleChangeTodoTitle = (event) => setTitle(event.target.value)
 
@@ -55,7 +58,10 @@ const Todo = ({
     }
   }
 
-  const handleIconDeleteClick = () => onDelete(id)
+  const handleIconDeleteClick = (event) => {
+    event.stopPropagation()
+    onDelete(id)
+  }
 
   const cancelEdit = () => {
     setTitle(children)
@@ -73,6 +79,8 @@ const Todo = ({
   }
 
   const handleDetailsTodoClick = () => onDetailsTodoClick(id)
+
+  const handleCheckboxClick = (event) => event.stopPropagation()
 
   return isEditing ? (
     <Container className={styles['input-wraper']}>
@@ -96,7 +104,11 @@ const Todo = ({
       onMouseLeave={handleMouseLeave}
       onClick={handleDetailsTodoClick}
     >
-      <Checkbox onChange={handleCheckboxChange} className={styles.checkbox} />
+      <Checkbox
+        onClick={handleCheckboxClick}
+        onChange={handleCheckboxChange}
+        className={styles.checkbox}
+      />
       <span className={styles['checkbox-custom']} />
       {children}
       {isMouseOver && (
