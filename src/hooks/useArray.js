@@ -36,7 +36,8 @@ const useArray = (initialState) => {
       replaceById,
       updateById,
       removeById,
-      clear
+      clear,
+      updateAll: setItems
     }
   ]
 }
